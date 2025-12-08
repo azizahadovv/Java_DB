@@ -3,10 +3,13 @@ package com.example.jpalessons.controller;
 
 import com.example.jpalessons.entity.Groups;
 import com.example.jpalessons.payload.ReqGroup;
+import com.example.jpalessons.projection.GroupClientProjection;
 import com.example.jpalessons.repository.GroupRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -16,24 +19,25 @@ public class GroupController {
     @Autowired
     private GroupRepo groupRepo;
 
+
+    @GetMapping()
+    public ResponseEntity<?> getGroup() {
+        List<Groups> findAll = groupRepo.findAll();
+        System.out.println(findAll);
+        return ResponseEntity.ok(findAll);
+
+//        return groupRepo.findById(id)
+//                .map(ResponseEntity::ok)
+//                .orElse(ResponseEntity.notFound().build());
+    }
+
+
     @PostMapping
     public ResponseEntity<?> saveGroup(@RequestBody ReqGroup reqGroup) {
         Groups group = groupRepo.save(
                 new Groups(reqGroup.getName())
         );
         return ResponseEntity.ok(group.getId());
-    }
-
-    @GetMapping
-    public ResponseEntity<?> getGroups(
-            @RequestParam(required = false) String name) {
-
-        if (name != null && !name.isBlank()) {
-            return ResponseEntity.ok(
-                    groupRepo.findByNameContainsIgnoreCase(name)
-            );
-        }
-        return ResponseEntity.ok(groupRepo.findAllProjectedBy());
     }
 
     @DeleteMapping("{id}")
@@ -55,4 +59,6 @@ public class GroupController {
 
         return ResponseEntity.ok("Updated");
     }
+
+
 }

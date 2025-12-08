@@ -4,15 +4,16 @@ package com.example.jpalessons.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.apache.catalina.Group;
+import lombok.*;
 
-@Entity
-@Data
-@AllArgsConstructor
+
+
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
+
 public class Student {
     @Id
     private Integer id;
