@@ -13,7 +13,6 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Groups {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

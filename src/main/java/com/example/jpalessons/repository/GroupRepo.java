@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface GroupRepo extends JpaRepository<Groups, Integer> {
 
-    List<Groups> findAllBy();
+    List<GroupClientProjection> findAllBy(String name);
 
     List<GroupClientProjection>
     findByNameContainsIgnoreCase(String name);

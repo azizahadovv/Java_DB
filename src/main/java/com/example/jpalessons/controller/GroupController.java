@@ -21,14 +21,11 @@ public class GroupController {
 
 
     @GetMapping()
-    public ResponseEntity<?> getGroup() {
-        List<Groups> findAll = groupRepo.findAll();
-        System.out.println(findAll);
-        return ResponseEntity.ok(findAll);
+    public ResponseEntity<?> getGroup(@RequestParam String name) {
 
-//        return groupRepo.findById(id)
-//                .map(ResponseEntity::ok)
-//                .orElse(ResponseEntity.notFound().build());
+        List<GroupClientProjection> allByName = groupRepo.findAllBy(name);
+
+        return ResponseEntity.ok(allByName);
     }
 
 
